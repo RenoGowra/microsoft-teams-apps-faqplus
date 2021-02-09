@@ -154,7 +154,7 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Cards
                 // Adds the "Ask an expert" button.
                 new AdaptiveSubmitAction
                 {
-                    Title = Strings.AskAnExpertButtonText+" or Reno",
+                    Title = Strings.AskAnExpertButtonText,
                     Data = new ResponseCardPayload
                     {
                         MsTeams = new CardAction
