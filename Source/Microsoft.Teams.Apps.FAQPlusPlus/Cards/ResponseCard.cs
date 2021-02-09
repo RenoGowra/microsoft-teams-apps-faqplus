@@ -1,4 +1,4 @@
-﻿// <copyright file="ResponseCard.cs" company="Microsoft">
+// <copyright file="ResponseCard.cs" company="Microsoft">
 // Copyright (c) Microsoft. All rights reserved.
 // </copyright>
 
@@ -154,7 +154,7 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Cards
                 // Adds the "Ask an expert" button.
                 new AdaptiveSubmitAction
                 {
-                    Title = Strings.AskAnExpertButtonText,
+                    Title = Strings.AskAnExpertButtonText+" or Reno",
                     Data = new ResponseCardPayload
                     {
                         MsTeams = new CardAction
