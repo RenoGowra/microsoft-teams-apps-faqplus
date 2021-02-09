@@ -1453,7 +1453,7 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Bots
             //await turnContext.SendActivityAsync(MessageFactory.Attachment(ResponseCard.GetCard(answerData, text, this.appBaseUri, payload))).ConfigureAwait(false);
 
             //trying to send simple text
-            await turnContext.SendActivityAsync(MessageFactory.Attachment("text",answerData)).ConfigureAwait(false);
+            await turnContext.SendActivityAsync(answerData).ConfigureAwait(false);
           }
                 }
                 else
