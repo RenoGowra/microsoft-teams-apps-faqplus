@@ -1479,5 +1479,28 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Bots
                 throw;
             }
         }
+
+    /// <summary>
+    /// Adding an extension which will unfurl links as specified in the document https://docs.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/how-to/link-unfurling?tabs=dotnet
+    /// </summary>
+    /// <param name="turnContext"></param>
+    /// <param name="query"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    protected override async Task<MessagingExtensionResponse> OnTeamsAppBasedLinkQueryAsync(ITurnContext<IInvokeActivity> turnContext, AppBasedLinkQuery query, CancellationToken cancellationToken)
+    {
+      //You'll use the query.link value to search your service and create a card response
+      var card = new HeroCard
+      {
+        Title = "Hero Card",
+        Text = query.Url,
+        Images = new List<CardImage> { new CardImage("https://raw.githubusercontent.com/microsoft/botframework-sdk/master/icon.png") },
+      };
+
+      var attachments = new MessagingExtensionAttachment(HeroCard.ContentType, null, card);
+      var result = new MessagingExtensionResult(AttachmentLayoutTypes.List, "result", new[] { attachments }, null, "test unfurl");
+
+      return new MessagingExtensionResponse(result);
     }
+  }
 }
