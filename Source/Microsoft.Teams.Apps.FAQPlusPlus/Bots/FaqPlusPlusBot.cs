@@ -1450,7 +1450,7 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Bots
                     }
                     else
                     {
-                        Console.Out(answerData);
+                        Console.WriteLine(answerData);
                         await turnContext.SendActivityAsync(MessageFactory.Attachment(ResponseCard.GetCard(answerData, text, this.appBaseUri, payload))).ConfigureAwait(false);
                     }
                 }
