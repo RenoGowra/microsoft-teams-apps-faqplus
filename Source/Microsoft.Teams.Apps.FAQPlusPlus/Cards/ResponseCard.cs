@@ -187,22 +187,22 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Cards
             };
             if(answer.StartsWith("https://microsoftapc.sharepoint.com"))
             {
-                actionsList.Add(
-                    new AdaptiveSubmitAction
-                    {
-                        Title = Strings.ShareFeedbackButtonText,
-                        Data = new ResponseCardPayload
-                                {
-                                  MsTeams = new CardAction
-                                            {
-                                              Type = ActionTypes.MessageBack,
-                                              DisplayText = "Play a video",
-                                              Text = Constants.ShareFeedback,
-                                            },
-                                  UserQuestion = userQuestion,
-                                  KnowledgeBaseAnswer = answer,
-                    },
-                })
+        actionsList.Add(
+            new AdaptiveSubmitAction
+            {
+              Title = "Play a video",
+              Data = new ResponseCardPayload
+              {
+                MsTeams = new CardAction
+                {
+                  Type = ActionTypes.MessageBack,
+                  DisplayText = "Play a video",
+                  Text = "Play a video",
+                },
+                UserQuestion = userQuestion,
+                KnowledgeBaseAnswer = answer,
+              },
+            });
             }
             return actionsList;
         }
