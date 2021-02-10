@@ -1450,12 +1450,6 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Bots
                     }
                     else
                     {
-                        if((answerData.answer).StartsWith("https://microsoftapc.sharepoint.com"))
-                        {
-                          answerData.answer = answerData.answer + " :MATCHED";
-                          await turnContext.SendActivityAsync(MessageFactory.Attachment(ResponseCard.GetCard(answerData, text, this.appBaseUri, payload))).ConfigureAwait(false);
-                        }
-                        else
                           await turnContext.SendActivityAsync(MessageFactory.Attachment(ResponseCard.GetCard(answerData, text, this.appBaseUri, payload))).ConfigureAwait(false);
                     }
                 }
