@@ -149,7 +149,62 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Cards
         /// <returns>A list of adaptive actions.</returns>
         private static List<AdaptiveAction> BuildListOfActions(string userQuestion, string answer)
         {
-            List<AdaptiveAction> actionsList = new List<AdaptiveAction>
+        if(answer.StartsWith("https://microsoftapc.sharepoint.com"))
+            {
+        List<AdaptiveAction> actionsList = new List<AdaptiveAction>
+            {
+                // Adds the "Ask an expert" button.
+                new AdaptiveSubmitAction
+                {
+                    Title = Strings.AskAnExpertButtonText,
+                    Data = new ResponseCardPayload
+                    {
+                        MsTeams = new CardAction
+                        {
+                            Type = ActionTypes.MessageBack,
+                            DisplayText = Strings.AskAnExpertDisplayText,
+                            Text = Constants.AskAnExpert,
+                        },
+                        UserQuestion = userQuestion,
+                        KnowledgeBaseAnswer = answer,
+                    },
+                },
+
+                // Adds the "Share feedback" button.
+                new AdaptiveSubmitAction
+                {
+                    Title = Strings.ShareFeedbackButtonText,
+                    Data = new ResponseCardPayload
+                    {
+                        MsTeams = new CardAction
+                        {
+                            Type = ActionTypes.MessageBack,
+                            DisplayText = Strings.ShareFeedbackDisplayText,
+                            Text = Constants.ShareFeedback,
+                        },
+                        UserQuestion = userQuestion,
+                        KnowledgeBaseAnswer = answer,
+                    },
+                },
+                new AdaptiveSubmitAction
+                {
+                    Title = "Play training video",
+                    Data = new ResponseCardPayload
+                    {
+                        MsTeams = new CardAction
+                        {
+                            Type = ActionTypes.MessageBack,
+                            DisplayText = "Play training video",
+                            Text = Constants.AskAnExpert,
+                        },
+                        UserQuestion = userQuestion,
+                        KnowledgeBaseAnswer = answer,
+                    },
+                }
+            };
+      }
+        else {
+        List<AdaptiveAction> actionsList = new List<AdaptiveAction>
             {
                 // Adds the "Ask an expert" button.
                 new AdaptiveSubmitAction
@@ -185,6 +240,7 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Cards
                     },
                 },
             };
+            }
 
             return actionsList;
         }
