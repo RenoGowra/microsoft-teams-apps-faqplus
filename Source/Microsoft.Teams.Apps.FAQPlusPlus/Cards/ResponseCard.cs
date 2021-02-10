@@ -149,7 +149,6 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Cards
         /// <returns>A list of adaptive actions.</returns>
         private static List<AdaptiveAction> BuildListOfActions(string userQuestion, string answer)
         {
-        
         List<AdaptiveAction> actionsList = new List<AdaptiveAction>
             {
                 // Adds the "Ask an expert" button.
@@ -186,6 +185,25 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Cards
                     },
                 },
             };
+            if(answer.StartsWith("https://microsoftapc.sharepoint.com"))
+            {
+                actionsList.Add(
+                    new AdaptiveSubmitAction
+                    {
+                        Title = Strings.ShareFeedbackButtonText,
+                        Data = new ResponseCardPayload
+                                {
+                                  MsTeams = new CardAction
+                                            {
+                                              Type = ActionTypes.MessageBack,
+                                              DisplayText = "Play a video",
+                                              Text = Constants.ShareFeedback,
+                                            },
+                                  UserQuestion = userQuestion,
+                                  KnowledgeBaseAnswer = answer,
+                    },
+                })
+            }
             return actionsList;
         }
 
