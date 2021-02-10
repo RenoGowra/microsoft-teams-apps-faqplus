@@ -186,6 +186,8 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Cards
                         KnowledgeBaseAnswer = answer,
                     },
                 },
+
+                //Adds the play training video button
                 new AdaptiveSubmitAction
                 {
                     Title = "Play training video",
