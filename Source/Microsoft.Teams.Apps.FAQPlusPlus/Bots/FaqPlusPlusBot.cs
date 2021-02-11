@@ -841,7 +841,9 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Bots
 
                     case Constants.NoCommand:
                         return;
-                    
+          case "Play":
+            this.logger.LogInformation("task/fetch done here");
+            break;
                     default:
                         this.logger.LogInformation("Unrecognized input in channel");
                         await turnContext.SendActivityAsync(MessageFactory.Attachment(UnrecognizedTeamInputCard.GetCard())).ConfigureAwait(false);
