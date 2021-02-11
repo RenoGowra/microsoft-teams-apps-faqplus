@@ -195,7 +195,7 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Cards
               {
                 MsTeams = new CardAction
                 {
-                  Type = ActionTypes.MessageBack,
+                  Type = "task/fetch",
                   DisplayText = "Play Training Video",
                   Text = "Play",
                 },
