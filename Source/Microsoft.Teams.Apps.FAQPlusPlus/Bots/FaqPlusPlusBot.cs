@@ -27,6 +27,7 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Bots
     using Microsoft.Teams.Apps.FAQPlusPlus.Common.Models.Configuration;
     using Microsoft.Teams.Apps.FAQPlusPlus.Common.Providers;
     using Microsoft.Teams.Apps.FAQPlusPlus.Helpers;
+    using Microsoft.Teams.Apps.FAQPlusPlus.Models;
     using Microsoft.Teams.Apps.FAQPlusPlus.Properties;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
@@ -289,17 +290,31 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Bots
             TaskModuleRequest taskModuleRequest,
             CancellationToken cancellationToken)
         {
-            try
-            {
-                var postedValues = JsonConvert.DeserializeObject<AdaptiveSubmitActionData>(JObject.Parse(taskModuleRequest?.Data?.ToString()).ToString());
-                var adaptiveCardEditor = MessagingExtensionQnaCard.AddQuestionForm(postedValues, this.appBaseUri);
-                return GetTaskModuleResponseAsync(adaptiveCardEditor, Strings.EditQuestionSubtitle);
-            }
-            catch (Exception ex)
-            {
-                this.logger.LogError(ex, "Error while fetch event is received from the user.");
-            }
+      if (taskModuleRequest?.Type == "task/fetch")
+      {
+        var asJobject = JObject.FromObject(taskModuleRequest.Data);
+        var value = asJobject.ToObject<CardTaskFetchValue<string>>()?.Data;
 
+        var taskInfo = new TaskInfo();
+        taskInfo.Url = taskInfo.FallbackUrl = value.KnowledgeBaseAnswer;
+        taskInfo.Height = 1000;
+        taskInfo.Width = 700;
+        taskInfo.Title = "Training Video";
+        return Task.FromResult(taskInfo.ToTaskModuleResponse());
+      }
+      else
+      {
+        try
+        {
+          var postedValues = JsonConvert.DeserializeObject<AdaptiveSubmitActionData>(JObject.Parse(taskModuleRequest?.Data?.ToString()).ToString());
+          var adaptiveCardEditor = MessagingExtensionQnaCard.AddQuestionForm(postedValues, this.appBaseUri);
+          return GetTaskModuleResponseAsync(adaptiveCardEditor, Strings.EditQuestionSubtitle);
+        }
+        catch (Exception ex)
+        {
+          this.logger.LogError(ex, "Error while fetch event is received from the user.");
+        }
+      }
             return default;
         }
 
