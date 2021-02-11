@@ -190,14 +190,14 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Cards
         actionsList.Add(
             new AdaptiveSubmitAction
             {
-              Title = "Play a video",
+              Title = "Play",
               Data = new ResponseCardPayload
               {
                 MsTeams = new CardAction
                 {
-                  Type = ActionTypes.MessageBack,
-                  DisplayText = "Play a video",
-                  Text = "Play a video",
+                  Type = "task/fetch",
+                  DisplayText = "Play Training Video",
+                  Text = "Play",
                 },
                 UserQuestion = userQuestion,
                 KnowledgeBaseAnswer = answer,
