@@ -290,10 +290,10 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Bots
             TaskModuleRequest taskModuleRequest,
             CancellationToken cancellationToken)
         {
-      if (taskModuleRequest?.Type == "task/fetch")
+      if (taskModuleRequest?.Text == "Play")
       {
-        var asJobject = JObject.FromObject(taskModuleRequest.Data);
-        var value = asJobject.ToObject<CardTaskFetchValue<string>>()?.Data;
+        //var asJobject = JObject.FromObject(taskModuleRequest.Data);
+        //var value = asJobject.ToObject<CardTaskFetchValue<string>>()?.Data;
 
         var response = new TaskModuleResponse
         {
@@ -303,8 +303,8 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Bots
             {
               Height = TaskModuleHeight,
               Width = TaskModuleWidth,
-              Title = PageTitle,
-              Url = PageURI,
+              Title = "Youtube",
+              Url = FallbackUrl = "https://microsoftapc.sharepoint.com",
             },
           },
         };
@@ -948,10 +948,7 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Bots
                     }
 
                     break;
-                case "Play":
-                  this.logger.LogInformation("task/fetch done here");
-                        await TasksModuleHelper.HandleInvokeMessages(message);
-                  break;
+            
         default:
                     var payload = ((JObject)message.Value).ToObject<ResponseCardPayload>();
 
