@@ -295,12 +295,20 @@ namespace Microsoft.Teams.Apps.FAQPlusPlus.Bots
         var asJobject = JObject.FromObject(taskModuleRequest.Data);
         var value = asJobject.ToObject<CardTaskFetchValue<string>>()?.Data;
 
-        var taskInfo = new TaskInfo();
-        taskInfo.Url = taskInfo.FallbackUrl = value.KnowledgeBaseAnswer;
-        taskInfo.Height = 1000;
-        taskInfo.Width = 700;
-        taskInfo.Title = "Training Video";
-        return Task.FromResult(taskInfo.ToTaskModuleResponse());
+        var response = new TaskModuleResponse
+        {
+          Task = new TaskModuleContinueResponse
+          {
+            Value = new TaskModuleTaskInfo()
+            {
+              Height = TaskModuleHeight,
+              Width = TaskModuleWidth,
+              Title = PageTitle,
+              Url = PageURI,
+            },
+          },
+        };
+        return response;
       }
       else
       {
